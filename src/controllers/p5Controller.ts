@@ -24,7 +24,7 @@ class P5Controller {
 
     async getP5History(req: Request, res: Response) {
         try {
-            const history = await P5Service.getP5History(req.params.id);
+            const history = await P5Service.getP5History(req.params._id); 
             res.json(history);
         } catch (error) {
             const message = error instanceof Error ? error.message : 'An unexpected error occurred';

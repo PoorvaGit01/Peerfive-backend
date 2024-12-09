@@ -3,20 +3,20 @@ import User from '../models/User';
 
 class UserService {
     async createUser(name: string) {
-        const user = new User({ id: new mongoose.Types.ObjectId().toString(), name });
+        const user = new User({name}); 
         return await user.save();
     }
 
-    async getUser(id: string){
-        return await User.findById(id)
+    async getUser(_id: string) {
+        return await User.findById(_id); 
     }
 
     async getAllUsers() {
-        return await User.find();
+        return await User.find(); 
     }
 
-    async updateUser(id: string, name: string) {
-        return await User.findOneAndUpdate({ id }, { name }, { new: true });
+    async updateUser(_id: string, name: string) {
+        return await User.findByIdAndUpdate(_id, { name }, { new: true }); 
     }
 }
 

@@ -1,11 +1,10 @@
-
 import User from '../models/User';
 import RewardHistory from '../models/RewardHistory';
 
 class P5Service {
     async createP5({ givenBy, givenTo, points }: { givenBy: string; givenTo: string; points: number }) {
-        const giver = await User.findOne({ id: givenBy });
-        const receiver = await User.findOne({ id: givenTo });
+        const giver = await User.findById(givenBy);
+        const receiver = await User.findById(givenTo);
 
         if (!giver || !receiver) throw new Error('User not found');
         if (giver.p5Balance < points) throw new Error('Insufficient P5 balance');
@@ -24,8 +23,8 @@ class P5Service {
         const transaction = await RewardHistory.findById(transactionId);
         if (!transaction) throw new Error('Transaction not found');
 
-        const giver = await User.findOne({ id: transaction.givenBy });
-        const receiver = await User.findOne({ id: transaction.givenTo });
+        const giver = await User.findById(transaction.givenBy);
+        const receiver = await User.findById(transaction.givenTo);
 
         if (!giver || !receiver) throw new Error('User not found');
 

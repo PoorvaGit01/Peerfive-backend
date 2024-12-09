@@ -14,10 +14,14 @@ class UserController {
 
     async getUser(req: Request, res: Response) {
         try {
-            const user = await UserService.getUser(req.params.id);
+            const user = await UserService.getUser(req.params._id);
+            if (!user) {
+                res.status(404).json({ error: 'User not found' });
+                return;
+            }
             res.json(user);
         } catch (error) {
-            const message = error instanceof Error ? error.message : 'No user found';
+            const message = error instanceof Error ? error.message : 'An unexpected error occurred';
             res.status(500).json({ error: message });
         }
     }
@@ -34,7 +38,11 @@ class UserController {
 
     async updateUser(req: Request, res: Response) {
         try {
-            const user = await UserService.updateUser(req.params.id, req.body.name);
+            const user = await UserService.updateUser(req.params._id, req.body.name);
+            if (!user) {
+                res.status(404).json({ error: 'User not found' });
+                return;
+            }
             res.json(user);
         } catch (error) {
             const message = error instanceof Error ? error.message : 'An unexpected error occurred';
