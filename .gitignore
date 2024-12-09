@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+
+# Debugging
+*.pid
+*.pid.lock
+
+# Build output
+dist/
+build/
+
+# Coverage reports
+coverage/
+
+# Cache directories
+.nyc_output
+*.tsbuildinfo
+
+# IDE files
+.idea/
+.vscode/
+
+# System files
+.DS_Store
